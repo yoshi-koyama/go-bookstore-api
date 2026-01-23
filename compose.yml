@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/go/src/app
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=bookstore_user
+      - DB_PASSWORD=bookstore_password
+      - DB_NAME=bookstore
+    depends_on:
+      - db
+    command:
+      - air
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: bookstore
+      MYSQL_USER: bookstore_user
+      MYSQL_PASSWORD: bookstore_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql_data:

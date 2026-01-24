@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dependency-injection-sample/config"
 	"dependency-injection-sample/handler"
 	"dependency-injection-sample/infra/dao"
 	"dependency-injection-sample/infra/database"
@@ -13,8 +14,14 @@ import (
 )
 
 func main() {
+	// 設定の読み込み
+	cfg, err := config.Load()
+	if err != nil {
+		log.Fatalf("Failed to load config: %v", err)
+	}
+
 	// データベース接続の初期化
-	db, err := database.NewDB()
+	db, err := database.NewDB(cfg)
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
@@ -34,5 +41,8 @@ func main() {
 		r.Post("/checkouts", bookHandler.Checkout)
 	})
 
-	http.ListenAndServe(":8080", r)
+	log.Println("Server starting on :8080")
+	if err := http.ListenAndServe(":8080", r); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }

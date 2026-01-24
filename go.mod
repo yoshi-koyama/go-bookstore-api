@@ -1,4 +1,4 @@
-module dependency-injection-sample
+module bookstore-api
 
 go 1.25.0
 

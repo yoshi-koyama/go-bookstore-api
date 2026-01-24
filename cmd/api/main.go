@@ -1,12 +1,12 @@
 package main
 
 import (
-	"dependency-injection-sample/config"
-	"dependency-injection-sample/handler"
-	"dependency-injection-sample/infra/dao"
-	"dependency-injection-sample/infra/database"
-	"dependency-injection-sample/infra/external"
-	"dependency-injection-sample/usecase"
+	"bookstore-api/config"
+	"bookstore-api/handler"
+	"bookstore-api/infra/dao"
+	"bookstore-api/infra/database"
+	"bookstore-api/infra/external"
+	"bookstore-api/usecase"
 	"log"
 
 	"github.com/go-chi/chi/v5"

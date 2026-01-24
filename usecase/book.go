@@ -2,7 +2,7 @@ package usecase
 
 import (
 	"context"
-	"dependency-injection-sample/domain/repository"
+	"bookstore-api/domain/repository"
 	"errors"
 )
 

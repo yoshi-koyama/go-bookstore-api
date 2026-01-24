@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"dependency-injection-sample/domain/model"
-	"dependency-injection-sample/domain/repository"
+	"bookstore-api/domain/model"
+	"bookstore-api/domain/repository"
 
 	"github.com/jmoiron/sqlx"
 )

@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"dependency-injection-sample/handler/request"
-	"dependency-injection-sample/handler/response"
-	"dependency-injection-sample/usecase"
+	"bookstore-api/handler/request"
+	"bookstore-api/handler/response"
+	"bookstore-api/usecase"
 	"github.com/go-chi/render"
 	"net/http"
 )

@@ -1,6 +1,6 @@
 package repository
 
-import "dependency-injection-sample/domain/model"
+import "bookstore-api/domain/model"
 
 type Book interface {
 	FindByID(id int) *model.Book

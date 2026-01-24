@@ -1,7 +1,7 @@
 package database
 
 import (
-	"dependency-injection-sample/config"
+	"bookstore-api/config"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"

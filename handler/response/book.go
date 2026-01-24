@@ -1,7 +1,7 @@
 package response
 
 import (
-	"dependency-injection-sample/usecase"
+	"bookstore-api/usecase"
 	"net/http"
 )
 

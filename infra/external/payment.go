@@ -1,7 +1,7 @@
 package external
 
 import (
-	"dependency-injection-sample/domain/repository"
+	"bookstore-api/domain/repository"
 	"fmt"
 )
 

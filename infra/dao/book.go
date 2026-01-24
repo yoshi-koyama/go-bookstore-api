@@ -3,38 +3,48 @@ package dao
 import (
 	"dependency-injection-sample/domain/model"
 	"dependency-injection-sample/domain/repository"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type bookRepository struct {
+	db *sqlx.DB
 }
 
-func NewBook() repository.Book {
-	return bookRepository{}
+func NewBook(db *sqlx.DB) repository.Book {
+	return bookRepository{
+		db: db,
+	}
 }
 
 func (b bookRepository) FindByID(id int) *model.Book {
-	if id == 1 {
-		book := model.NewBook(1, "The Lord of the Rings", 1600)
-		return &book
-	} else if id == 2 {
-		book := model.NewBook(2, "Harry Potter and the Philosopher's Stone, Book 1", 1200)
-		return &book
-	} else if id == 3 {
-		book := model.NewBook(3, "The Chronicles of Narnia: 1", 4000)
-		return &book
-	} else if id == 4 {
-		book := model.NewBook(3, "The Saga of Darren Shan", 1500)
-		return &book
-	} else {
+	var record bookRecord
+	err := b.db.Get(&record, "SELECT id, name, price FROM books WHERE id = ?", id)
+	if err != nil {
 		return nil
 	}
+
+	book := model.NewBook(record.ID, record.Name, record.Price)
+	return &book
+}
+
+type bookRecord struct {
+	ID    int    `db:"id"`
+	Name  string `db:"name"`
+	Price int    `db:"price"`
 }
 
 func (b bookRepository) FindAll() []model.Book {
-	return []model.Book{
-		model.NewBook(1, "The Lord of the Rings", 1600),
-		model.NewBook(2, "Harry Potter and the Philosopher's Stone, Book 1", 1200),
-		model.NewBook(3, "The Chronicles of Narnia: 1", 4000),
-		model.NewBook(4, "The Saga of Darren Shan", 1500),
+	var records []bookRecord
+	err := b.db.Select(&records, "SELECT id, name, price FROM books")
+	if err != nil {
+		return []model.Book{}
 	}
+
+	books := make([]model.Book, 0, len(records))
+	for _, record := range records {
+		books = append(books, model.NewBook(record.ID, record.Name, record.Price))
+	}
+
+	return books
 }

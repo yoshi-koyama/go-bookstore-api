@@ -1,3 +1,7 @@
+-- 文字コード設定
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 -- データベースの使用
 USE bookstore;
 

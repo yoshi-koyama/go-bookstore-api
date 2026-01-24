@@ -29,3 +29,12 @@ func (b bookRepository) FindByID(id int) *model.Book {
 		return nil
 	}
 }
+
+func (b bookRepository) FindAll() []model.Book {
+	return []model.Book{
+		model.NewBook(1, "The Lord of the Rings", 1600),
+		model.NewBook(2, "Harry Potter and the Philosopher's Stone, Book 1", 1200),
+		model.NewBook(3, "The Chronicles of Narnia: 1", 4000),
+		model.NewBook(4, "The Saga of Darren Shan", 1500),
+	}
+}

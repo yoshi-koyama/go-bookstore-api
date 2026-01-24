@@ -10,6 +10,7 @@ import (
 
 type Book interface {
 	Checkout(w http.ResponseWriter, r *http.Request)
+	GetBooks(w http.ResponseWriter, r *http.Request)
 }
 
 type bookHandler struct {
@@ -51,6 +52,22 @@ func (b bookHandler) Checkout(w http.ResponseWriter, r *http.Request) {
 	render.Status(r, http.StatusOK)
 	render.Render(w, r, response.NewBuyBooks(*result))
 	return
+}
+
+func (b bookHandler) GetBooks(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	books, err := b.useCase.GetAllBooks(ctx)
+	if err != nil {
+		render.Status(r, http.StatusInternalServerError)
+		render.JSON(w, r, map[string]string{
+			"message": "something went wrong",
+		})
+		return
+	}
+
+	render.Status(r, http.StatusOK)
+	render.Render(w, r, response.NewBookList(books))
 }
 
 type ErrResponse struct {

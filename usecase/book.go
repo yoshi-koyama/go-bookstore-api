@@ -8,6 +8,13 @@ import (
 
 type Book interface {
 	BuyBooks(ctx context.Context, id int, amountToBuy int) (*string, error)
+	GetAllBooks(ctx context.Context) ([]BookDTO, error)
+}
+
+type BookDTO struct {
+	ID    int
+	Name  string
+	Price int
 }
 
 type bookUseCase struct {
@@ -30,4 +37,19 @@ func (b bookUseCase) BuyBooks(ctx context.Context, id int, amountToBuy int) (*st
 
 	result := b.paymentRepo.MakePayment(book.Price() * amountToBuy)
 	return &result, nil
+}
+
+func (b bookUseCase) GetAllBooks(ctx context.Context) ([]BookDTO, error) {
+	books := b.bookRepo.FindAll()
+
+	var result []BookDTO
+	for _, book := range books {
+		result = append(result, BookDTO{
+			ID:    book.ID(),
+			Name:  book.Name(),
+			Price: book.Price(),
+		})
+	}
+
+	return result, nil
 }

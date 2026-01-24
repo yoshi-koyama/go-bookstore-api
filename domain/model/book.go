@@ -14,6 +14,10 @@ func NewBook(id int, name string, price int) Book {
 	}
 }
 
+func (b Book) ID() int {
+	return b.id
+}
+
 func (b Book) Name() string {
 	return b.name
 }

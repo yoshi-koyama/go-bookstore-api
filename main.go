@@ -20,6 +20,7 @@ func main() {
 		w.Write([]byte("hello world"))
 	})
 	r.Route("/bookstore/api", func(r chi.Router) {
+		r.Get("/books", bookHandler.GetBooks)
 		r.Post("/checkouts", bookHandler.Checkout)
 	})
 

@@ -94,6 +94,12 @@ curl http://localhost:8080/hello
 # 出力: hello world
 ```
 
+### 書籍一覧取得API
+
+```bash
+curl http://localhost:8080/bookstore/api/books
+```
+
 ### チェックアウトAPI
 
 ```bash
@@ -110,6 +116,7 @@ curl -X POST http://localhost:8080/bookstore/api/checkouts \
 | メソッド | パス | 説明 |
 |---------|------|------|
 | GET | `/hello` | ヘルスチェック |
+| GET | `/bookstore/api/books` | 書籍一覧の取得 |
 | POST | `/bookstore/api/checkouts` | 書籍のチェックアウト |
 
 ## データベース

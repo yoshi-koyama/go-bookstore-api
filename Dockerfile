@@ -1,4 +1,4 @@
-FROM golang:1.23
+FROM golang:1.25
 ENV TZ="Asia/Tokyo"
 WORKDIR /go/src/app
 COPY . .

@@ -1,8 +1,6 @@
 module dependency-injection-sample
 
-go 1.21.0
-
-toolchain go1.23.12
+go 1.25.0
 
 require (
 	github.com/go-chi/chi/v5 v5.0.7

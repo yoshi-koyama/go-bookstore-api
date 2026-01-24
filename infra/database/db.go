@@ -21,11 +21,5 @@ func NewDB() (*sqlx.DB, error) {
 		return nil, err
 	}
 
-	// 文字コードを明示的に設定
-	_, err = db.Exec("SET NAMES utf8mb4")
-	if err != nil {
-		return nil, err
-	}
-
 	return db, nil
 }

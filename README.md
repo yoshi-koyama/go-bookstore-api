@@ -100,8 +100,8 @@ curl http://localhost:8080/hello
 curl -X POST http://localhost:8080/bookstore/api/checkouts \
   -H "Content-Type: application/json" \
   -d '{
-    "book_id": 1,
-    "quantity": 2
+    "id": 1,
+    "amount_to_pay": 2000
   }'
 ```
 

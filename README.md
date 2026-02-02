@@ -19,6 +19,11 @@ Go言語で実装された書店API。クリーンアーキテクチャと依存
 
 ```
 .
+├── cmd/
+│   └── api/
+│       └── main.go      # エントリーポイント
+├── config/              # 設定管理
+│   └── config.go        # 環境変数読み込み
 ├── domain/              # ドメイン層
 │   ├── model/          # ドメインモデル
 │   │   └── book.go     # Book エンティティ
@@ -36,13 +41,14 @@ Go言語で実装された書店API。クリーンアーキテクチャと依存
 ├── infra/              # インフラストラクチャ層
 │   ├── dao/            # データアクセス
 │   │   └── book.go     # Book DAO
-│   └── external/       # 外部サービス
-│       └── payment.go  # 決済サービス（Rakuten Pay）
+│   ├── external/       # 外部サービス
+│   │   └── payment.go  # 決済サービス（Rakuten Pay）
+│   └── database/       # データベース接続
+│       └── db.go       # DB初期化
 ├── compose.yml         # Docker Compose 設定
 ├── Dockerfile          # Docker イメージ定義
 ├── init.sql            # データベース初期化スクリプト
 ├── .air.toml           # Air 設定ファイル
-├── main.go             # エントリーポイント
 └── go.mod              # Go モジュール定義
 ```
 
@@ -118,6 +124,20 @@ curl -X POST http://localhost:8080/bookstore/api/checkouts \
 | GET | `/hello` | ヘルスチェック |
 | GET | `/bookstore/api/books` | 書籍一覧の取得 |
 | POST | `/bookstore/api/checkouts` | 書籍のチェックアウト |
+
+## 環境変数
+
+アプリケーションの設定は環境変数で管理されます。Docker Compose使用時は`compose.yml`で自動設定されます。
+
+| 環境変数 | 説明 | デフォルト値 |
+|---------|------|-------------|
+| `DB_HOST` | データベースホスト | `db`（コンテナ間）/ `localhost`（ホストから） |
+| `DB_PORT` | データベースポート | `3306` |
+| `DB_USER` | データベースユーザー | `bookstore_user` |
+| `DB_PASSWORD` | データベースパスワード | `bookstore_password` |
+| `DB_NAME` | データベース名 | `bookstore` |
+
+設定は`config/config.go`の`config.Load()`関数で読み込まれ、`cmd/api/main.go`で依存性注入に使用されます。
 
 ## データベース
 

@@ -124,6 +124,11 @@ Docker Compose経由で以下の環境変数が設定される（`compose.yml`�
 - **コミットメッセージは日本語で記述する**
 - コミットメッセージの最後に `Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>` を追加（Claudeとの共同作業時）
 
+## 🔔 通知（重要）
+作業完了時は**必ず**以下のコマンドで通知する
+
+afplay /System/Library/Sounds/Glass.aiff
+
 ## API エンドポイント
 
 - `GET /hello`: ヘルスチェック

@@ -199,7 +199,9 @@ docker compose down -v
 ## 依存関係
 
 - [chi](https://github.com/go-chi/chi) - 軽量で高速なHTTPルーター
-- [render](https://github.com/go-chi/render) - JSONレンダリング
+- [render](https://github.com/go-chi/render) - JSONレンダリングとコンテンツネゴシエーション
+- [sqlx](https://github.com/jmoiron/sqlx) - database/sqlの拡張ライブラリ。構造体へのマッピングを提供
+- [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) - MySQL用のdatabase/sqlドライバー
 
 ## ライセンス
 

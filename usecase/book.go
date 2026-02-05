@@ -9,6 +9,7 @@ import (
 type Book interface {
 	BuyBooks(ctx context.Context, id int, amountToBuy int) (*string, error)
 	GetAllBooks(ctx context.Context) ([]BookDTO, error)
+	GetBook(ctx context.Context, id int) (*BookDTO, error)
 }
 
 type BookDTO struct {
@@ -52,4 +53,19 @@ func (b bookUseCase) GetAllBooks(ctx context.Context) ([]BookDTO, error) {
 	}
 
 	return result, nil
+}
+
+func (b bookUseCase) GetBook(ctx context.Context, id int) (*BookDTO, error) {
+	book := b.bookRepo.FindByID(id)
+	if book == nil {
+		return nil, errors.New("cannot find book")
+	}
+
+	result := BookDTO{
+		ID:    book.ID(),
+		Name:  book.Name(),
+		Price: book.Price(),
+	}
+
+	return &result, nil
 }

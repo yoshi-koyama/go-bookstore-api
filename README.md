@@ -106,6 +106,13 @@ curl http://localhost:8080/hello
 curl http://localhost:8080/bookstore/api/books
 ```
 
+### 書籍詳細取得API
+
+```bash
+# 書籍ID=1の詳細を取得
+curl http://localhost:8080/bookstore/api/books/1
+```
+
 ### チェックアウトAPI
 
 ```bash
@@ -123,6 +130,7 @@ curl -X POST http://localhost:8080/bookstore/api/checkouts \
 |---------|------|------|
 | GET | `/hello` | ヘルスチェック |
 | GET | `/bookstore/api/books` | 書籍一覧の取得 |
+| GET | `/bookstore/api/books/:id` | 書籍詳細の取得 |
 | POST | `/bookstore/api/checkouts` | 書籍のチェックアウト |
 
 ## 環境変数

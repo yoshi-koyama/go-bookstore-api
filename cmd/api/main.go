@@ -38,6 +38,7 @@ func main() {
 	})
 	r.Route("/bookstore/api", func(r chi.Router) {
 		r.Get("/books", bookHandler.GetBooks)
+		r.Get("/books/{id}", bookHandler.GetBook)
 		r.Post("/checkouts", bookHandler.Checkout)
 	})
 

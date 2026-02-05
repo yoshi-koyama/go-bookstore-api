@@ -25,6 +25,18 @@ type Book struct {
 	Price int    `json:"price"`
 }
 
+func NewBook(book usecase.BookDTO) *Book {
+	return &Book{
+		ID:    book.ID,
+		Name:  book.Name,
+		Price: book.Price,
+	}
+}
+
+func (b *Book) Render(w http.ResponseWriter, r *http.Request) error {
+	return nil
+}
+
 type BookList struct {
 	Books []Book `json:"books"`
 }

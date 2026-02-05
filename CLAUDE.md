@@ -127,7 +127,7 @@ Docker Compose経由で以下の環境変数が設定される（`compose.yml`�
 ## 🔔 通知（重要）
 作業完了時は**必ず**以下のコマンドで通知する
 
-afplay /System/Library/Sounds/Glass.aiff
+
 
 ## API エンドポイント
 

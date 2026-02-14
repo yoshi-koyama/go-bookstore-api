@@ -21,7 +21,9 @@ services:
       - air
 
   db:
-    image: mysql:8.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile.mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root_password
